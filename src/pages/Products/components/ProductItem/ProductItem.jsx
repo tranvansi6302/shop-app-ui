@@ -10,7 +10,6 @@ export default function ProductItem({ products }) {
             {products &&
                 products.map((product) => {
                     const price = getMinMaxPrice(product.items)
-
                     return (
                         <Link to={`/products/${product.id}`} key={product.id} className='col-lg-4 col-md-6 col-sm-6'>
                             <div className='product__item'>

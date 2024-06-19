@@ -6,7 +6,7 @@ import { omit } from 'lodash'
 import { useMutation } from '@tanstack/react-query'
 import authApi from '../../apis/auth.api'
 import { toast } from 'react-toastify'
-import { useNavigate } from 'react-router-dom'
+import { Link, useNavigate } from 'react-router-dom'
 import pathConfig from '../../configs/path.config'
 
 const registerSchema = yup.object({
@@ -28,6 +28,7 @@ export default function Register() {
         formState: { errors }
     } = useForm({
         defaultValues: {
+            fullname: '',
             email: '',
             password: '',
             confirmPassword: ''
@@ -113,13 +114,9 @@ export default function Register() {
                                         </div>
                                         <p className='text-center'>
                                             Bạn đã có tài khoản?
-                                            <a
-                                                type='submit'
-                                                className='fw-semibold text-decoration-none ms-1'
-                                                href='login.html'
-                                            >
-                                                Đăng nhập ngay
-                                            </a>
+                                            <Link style={{ color: '#174ad6' }} to={pathConfig.login}>
+                                                Đăng nhập
+                                            </Link>
                                         </p>
                                     </form>
                                 </div>
