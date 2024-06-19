@@ -7,6 +7,8 @@ import Login from '../pages/Login'
 import { useContext } from 'react'
 import { AppContext } from '../contexts/app.context'
 import ListCart from '../pages/Cart/ListCart'
+import ConfirmOrder from '../pages/Orders/ConfirmOrder'
+import MainLayout from '../layouts/MainLayout'
 
 function ProtectedRouter() {
     const { isAuthenticated } = useContext(AppContext)
@@ -21,11 +23,19 @@ export default function AppRouter() {
     return useRoutes([
         {
             path: pathConfig.home,
-            element: <ProductList />
+            element: (
+                <MainLayout>
+                    <ProductList />
+                </MainLayout>
+            )
         },
         {
             path: pathConfig.productDetail,
-            element: <ProductDetail />
+            element: (
+                <MainLayout>
+                    <ProductDetail />
+                </MainLayout>
+            )
         },
 
         {
@@ -34,7 +44,19 @@ export default function AppRouter() {
             children: [
                 {
                     path: pathConfig.cart,
-                    element: <ListCart />
+                    element: (
+                        <MainLayout>
+                            <ListCart />
+                        </MainLayout>
+                    )
+                },
+                {
+                    path: pathConfig.confirmOrder,
+                    element: (
+                        <MainLayout>
+                            <ConfirmOrder />
+                        </MainLayout>
+                    )
                 }
             ]
         },

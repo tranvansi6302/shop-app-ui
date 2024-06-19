@@ -1,7 +1,8 @@
+import { useContext } from 'react'
+import { MdOutlineShoppingCart } from 'react-icons/md'
 import { Link } from 'react-router-dom'
 import logo from '../../assets/img/logo.png'
 import pathConfig from '../../configs/path.config'
-import { useContext } from 'react'
 import { AppContext } from '../../contexts/app.context'
 export default function Header() {
     const { profile, isAuthenticated } = useContext(AppContext)
@@ -33,9 +34,9 @@ export default function Header() {
                 <div className='row'>
                     <div className='col-lg-3 col-md-3'>
                         <div className='header__logo'>
-                            <a href='./index.html'>
+                            <Link to={'/'}>
                                 <img src={logo} alt='logo' />
-                            </a>
+                            </Link>
                         </div>
                     </div>
                     <div className='col-lg-6 col-md-6'>
@@ -76,9 +77,14 @@ export default function Header() {
                             </ul>
                         </nav>
                     </div>
-                </div>
-                <div className='canvas__open'>
-                    <i className='fa fa-bars' />
+                    <div
+                        style={{ display: 'flex', alignItems: 'center', justifyContent: 'center' }}
+                        className='col-lg-3 col-md-6'
+                    >
+                        <Link to='/carts' style={{ cursor: 'pointer' }}>
+                            <MdOutlineShoppingCart fontSize='30px' />
+                        </Link>
+                    </div>
                 </div>
             </div>
         </header>

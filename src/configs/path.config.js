@@ -3,7 +3,8 @@ const pathConfig = {
     productDetail: '/products/:id',
     register: '/register',
     login: '/login',
-    cart: '/cart'
+    cart: '/carts',
+    confirmOrder: '/confirm-order'
 }
 
 export default pathConfig
