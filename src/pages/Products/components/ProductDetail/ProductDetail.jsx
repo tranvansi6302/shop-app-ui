@@ -7,7 +7,7 @@ import orderApi from '../../../../apis/order.api'
 import productApi from '../../../../apis/product.api'
 import { AppContext } from '../../../../contexts/app.context'
 import { formatCurrencyVND } from '../../../../utils/format'
-import { getMinMaxPrice } from '../../../../utils/helpers'
+import { getImageUrl, getMinMaxPrice } from '../../../../utils/helpers'
 
 export default function ProductDetail() {
     const { id: productId } = useParams()
@@ -106,26 +106,31 @@ export default function ProductDetail() {
                                 <li className='nav-item'>
                                     {product &&
                                         product.data.result.images.length > 0 &&
-                                        product.data.result.images.map((item, index) => (
-                                            <a
-                                                key={item.id}
-                                                className={`nav-link ${index == 0 ? 'active' : ''}`}
-                                                data-toggle='tab'
-                                                href={`#tabs-${index + 1}`}
-                                                role='tab'
-                                            >
-                                                <div
-                                                    className='product__thumb__pic set-bg'
-                                                    data-setbg={item.url}
-                                                    style={{
-                                                        backgroundImage: `url(${item.url})`,
-                                                        width: '65px',
-                                                        height: '65px',
-                                                        marginBottom: '5px'
-                                                    }}
-                                                ></div>
-                                            </a>
-                                        ))}
+                                        product.data.result.images.map((item, index) => {
+                                            const image = !item?.url.startsWith('http')
+                                                ? getImageUrl(item?.url)
+                                                : item?.url
+                                            return (
+                                                <a
+                                                    key={item.id}
+                                                    className={`nav-link ${index == 0 ? 'active' : ''}`}
+                                                    data-toggle='tab'
+                                                    href={`#tabs-${index + 1}`}
+                                                    role='tab'
+                                                >
+                                                    <div
+                                                        className='product__thumb__pic set-bg'
+                                                        data-setbg={image}
+                                                        style={{
+                                                            backgroundImage: `url(${image})`,
+                                                            width: '65px',
+                                                            height: '65px',
+                                                            marginBottom: '5px'
+                                                        }}
+                                                    ></div>
+                                                </a>
+                                            )
+                                        })}
                                 </li>
                             </ul>
                         </div>
@@ -133,24 +138,30 @@ export default function ProductDetail() {
                             <div className='tab-content'>
                                 {product &&
                                     product.data.result.images.length > 0 &&
-                                    product.data.result.images.map((item, index) => (
-                                        <div
-                                            key={item.id}
-                                            className={`tab-pane ${index == 0 ? 'active' : ''}`}
-                                            id={`tabs-${index + 1}`}
-                                            role='tabpanel'
-                                        >
-                                            <div style={{ height: '450px' }} className='product__details__pic__item'>
-                                                <img
-                                                    style={{ objectFit: 'cover' }}
-                                                    width='100%'
-                                                    height='100%'
-                                                    alt={item.url}
-                                                    src={item.url}
-                                                />
+                                    product.data.result.images.map((item, index) => {
+                                        const image = !item?.url.startsWith('http') ? getImageUrl(item?.url) : item?.url
+                                        return (
+                                            <div
+                                                key={item.id}
+                                                className={`tab-pane ${index == 0 ? 'active' : ''}`}
+                                                id={`tabs-${index + 1}`}
+                                                role='tabpanel'
+                                            >
+                                                <div
+                                                    style={{ height: '450px' }}
+                                                    className='product__details__pic__item'
+                                                >
+                                                    <img
+                                                        style={{ objectFit: 'cover' }}
+                                                        width='100%'
+                                                        height='100%'
+                                                        alt={image}
+                                                        src={image}
+                                                    />
+                                                </div>
                                             </div>
-                                        </div>
-                                    ))}
+                                        )
+                                    })}
                             </div>
                         </div>
                         <div className='col-lg-6 col-md-9'>

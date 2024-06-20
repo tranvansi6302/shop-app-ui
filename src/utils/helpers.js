@@ -27,3 +27,5 @@ export const setProfile = (profile) => {
 export const cleanProfile = () => {
     localStorage.removeItem('profile')
 }
+
+export const getImageUrl = (url) => `http://localhost:3000/uploads/${url}`

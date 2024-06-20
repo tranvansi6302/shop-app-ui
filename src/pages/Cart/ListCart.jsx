@@ -10,11 +10,7 @@ import { queryClient } from '../../main'
 export default function ListCart() {
     const navigate = useNavigate() // Khởi tạo useHistory
 
-    const {
-        data: carts,
-        isLoading,
-        refetch
-    } = useQuery({
+    const { data: carts, refetch } = useQuery({
         queryKey: ['carts'],
         queryFn: () => orderApi.getCarts(),
         placeholderData: keepPreviousData
@@ -121,7 +117,7 @@ export default function ListCart() {
             }
         })
     }
-    if (isLoading) return <div>Loading...</div>
+
     return (
         <section className='shopping-cart spad'>
             <div className='container'>

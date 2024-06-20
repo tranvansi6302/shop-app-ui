@@ -4,19 +4,23 @@ import { FaRegHeart } from 'react-icons/fa6'
 import { formatCurrencyVND } from '../../../../utils/format'
 import { Link } from 'react-router-dom'
 import { getMinMaxPrice } from '../../../../utils/helpers'
+import { getImageUrl } from '../../../../utils/helpers'
 export default function ProductItem({ products }) {
     return (
         <Fragment>
             {products &&
                 products.map((product) => {
                     const price = getMinMaxPrice(product.items)
+                    const image = !product?.images[0]?.url.startsWith('http')
+                        ? getImageUrl(product?.images[0]?.url)
+                        : product?.images[0]?.url
                     return (
                         <Link to={`/products/${product.id}`} key={product.id} className='col-lg-4 col-md-6 col-sm-6'>
                             <div className='product__item'>
                                 <div
                                     className='product__item__pic set-bg'
                                     data-setbg={product?.images[0].url}
-                                    style={{ backgroundImage: `url(${product?.images[0].url})` }}
+                                    style={{ backgroundImage: `url(${image})` }}
                                 >
                                     <ul className='product__hover'>
                                         <li>

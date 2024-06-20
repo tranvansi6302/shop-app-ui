@@ -1,14 +1,14 @@
+import { useContext } from 'react'
 import { Navigate, Outlet, useRoutes } from 'react-router-dom'
 import pathConfig from '../configs/path.config'
+import { AppContext } from '../contexts/app.context'
+import MainLayout from '../layouts/MainLayout'
+import ListCart from '../pages/Cart/ListCart'
+import Login from '../pages/Login'
+import ConfirmOrder from '../pages/Orders/ConfirmOrder'
 import ProductList from '../pages/Products/ProductList'
 import ProductDetail from '../pages/Products/components/ProductDetail'
 import Register from '../pages/Register'
-import Login from '../pages/Login'
-import { useContext } from 'react'
-import { AppContext } from '../contexts/app.context'
-import ListCart from '../pages/Cart/ListCart'
-import ConfirmOrder from '../pages/Orders/ConfirmOrder'
-import MainLayout from '../layouts/MainLayout'
 
 function ProtectedRouter() {
     const { isAuthenticated } = useContext(AppContext)
